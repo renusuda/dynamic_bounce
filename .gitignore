@@ -46,3 +46,6 @@ app.*.map.json
 
 # Exclude memo folder
 memo/
+
+# FVM Version Cache
+.fvm/
