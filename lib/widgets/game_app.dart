@@ -1,5 +1,6 @@
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
 import 'package:dynamic_bounce/overlays/home.dart';
+import 'package:dynamic_bounce/overlays/playing.dart';
 import 'package:dynamic_bounce/overlays/ranking.dart';
 import 'package:dynamic_bounce/overlays/score.dart';
 import 'package:dynamic_bounce/overlays/settings.dart';
@@ -31,6 +32,7 @@ class GameApp extends StatelessWidget {
                     gameFactory: DynamicBounceGame.new,
                     overlayBuilderMap: {
                       PlayStatus.home.name: (_, game) => Home(game: game),
+                      PlayStatus.playing.name: (_, game) => Playing(game: game),
                       PlayStatus.score.name: (_, __) => const Score(),
                       PlayStatus.ranking.name: (_, __) => const Ranking(),
                       PlayStatus.user.name: (_, __) => const User(),

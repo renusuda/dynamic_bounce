@@ -72,7 +72,9 @@ class PlayButton extends StatelessWidget {
             Icons.play_circle_outline,
           ),
           iconSize: 72,
-          onPressed: game.startGame,
+          onPressed: () {
+            game.playStatus = PlayStatus.playing;
+          },
         ),
       ],
     );
