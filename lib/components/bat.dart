@@ -1,7 +1,6 @@
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 
@@ -43,18 +42,6 @@ class Bat extends PositionComponent
     }
     final newPosition = _getNewXPosition(event.localDelta.x);
     position.x = newPosition;
-  }
-
-  /// Moves the bat by a given horizontal offset with a smooth animation.
-  void moveBy(double dx) {
-    final x = _getNewXPosition(dx);
-    final y = position.y;
-    add(
-      MoveToEffect(
-        Vector2(x, y),
-        EffectController(duration: 0.1),
-      ),
-    );
   }
 
   /// Returns the new X position within the game width limit.
