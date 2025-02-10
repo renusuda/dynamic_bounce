@@ -4,6 +4,7 @@ import 'package:dynamic_bounce/components/ball.dart';
 import 'package:dynamic_bounce/components/bat.dart';
 import 'package:dynamic_bounce/components/brick.dart';
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
+import 'package:dynamic_bounce/providers/score.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,7 +27,14 @@ class Playing extends ConsumerStatefulWidget {
 class _PlayingState extends ConsumerState<Playing> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final score = ref.watch(scoreProvider);
+    return Text(
+      'Score: $score',
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 32,
+      ),
+    );
   }
 
   @override

@@ -1,10 +1,13 @@
+import 'package:dynamic_bounce/providers/score.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_riverpod/flame_riverpod.dart';
 import 'package:flutter/material.dart';
 
 // TODO(me): Update this class to dynamic island.
 /// The brick of the game.
-class Brick extends PositionComponent {
+class Brick extends PositionComponent
+    with CollisionCallbacks, RiverpodComponentMixin {
   /// Creates a new brick.
   Brick({
     required super.position,
@@ -30,5 +33,14 @@ class Brick extends PositionComponent {
       ),
       _paint,
     );
+  }
+
+  @override
+  void onCollisionStart(
+    Set<Vector2> intersectionPoints,
+    PositionComponent other,
+  ) {
+    super.onCollisionStart(intersectionPoints, other);
+    ref.read(scoreProvider.notifier).increment();
   }
 }
