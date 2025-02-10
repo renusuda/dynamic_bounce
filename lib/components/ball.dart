@@ -73,24 +73,12 @@ class Ball extends CircleComponent
         velocity.x = -velocity.x;
       }
     } else if (other is Bat) {
-      // To-do: Adjust the way the ball bounces off the bat so that the user can
-      // have some control over its direction.
-      velocity
-        ..x = velocity.x +
-            (position.x - other.position.x) / other.size.x * game.width * 0.3
-        ..y = -velocity.y;
+      velocity.y = -velocity.y;
     } else if (other is Brick) {
-      // TODO(me): Adjust the way the ball bounces off the brick so that the
-      // user can have some control over its direction.
-      const speedUpScale = 1.05;
+      const speedUpScale = 1.1;
       velocity
-        ..x = -velocity.x * speedUpScale
-        ..y = velocity.y +
-            (position.y - other.position.y) /
-                other.size.y *
-                game.width *
-                0.3 *
-                speedUpScale;
+        ..y = -velocity.y
+        ..scale(speedUpScale);
     }
   }
 }
