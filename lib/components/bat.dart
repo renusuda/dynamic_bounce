@@ -40,8 +40,11 @@ class Bat extends PositionComponent
     if (!isMounted) {
       return;
     }
-    final newPosition = _getNewXPosition(event.localDelta.x);
-    position.x = newPosition;
+    final newXPosition = _getNewXPosition(event.localDelta.x);
+    final newYPosition = _getNewYPosition(event.localDelta.y);
+    position
+      ..x = newXPosition
+      ..y = newYPosition;
   }
 
   /// Returns the new X position within the game width limit.
@@ -49,6 +52,14 @@ class Bat extends PositionComponent
     return (position.x + dx).clamp(
       0,
       game.width,
+    );
+  }
+
+  /// Returns the new Y position within the lower half of the game screen.
+  double _getNewYPosition(double dy) {
+    return (position.y + dy).clamp(
+      game.height / 2,
+      game.height,
     );
   }
 }
