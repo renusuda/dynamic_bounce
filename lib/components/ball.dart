@@ -2,16 +2,20 @@ import 'package:dynamic_bounce/components/bat.dart';
 import 'package:dynamic_bounce/components/brick.dart';
 import 'package:dynamic_bounce/components/play_area.dart';
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
+import 'package:dynamic_bounce/models/play_status_type.dart';
+import 'package:dynamic_bounce/providers/play_status.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// A ball that bounces around the screen.
 class Ball extends CircleComponent
     with CollisionCallbacks, HasGameReference<DynamicBounceGame> {
   /// Creates a new ball.
   Ball({
+    required this.ref,
     required this.velocity,
     required super.position,
   }) : super(
@@ -24,6 +28,9 @@ class Ball extends CircleComponent
             CircleHitbox(),
           ],
         );
+
+  /// The widget reference.
+  final WidgetRef ref;
 
   /// The velocity of the ball.
   final Vector2 velocity;
@@ -56,7 +63,9 @@ class Ball extends CircleComponent
           RemoveEffect(
             delay: 0.35,
             onComplete: () {
-              game.playStatus = PlayStatus.score;
+              ref
+                  .read(playStatusProvider.notifier)
+                  .updatePlayStatus(PlayStatusType.score);
             },
           ),
         );

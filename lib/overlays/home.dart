@@ -1,5 +1,8 @@
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
+import 'package:dynamic_bounce/models/play_status_type.dart';
+import 'package:dynamic_bounce/providers/play_status.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The home overlay.
 class Home extends StatelessWidget {
@@ -46,7 +49,7 @@ class Home extends StatelessWidget {
 }
 
 /// The play button.
-class PlayButton extends StatelessWidget {
+class PlayButton extends ConsumerWidget {
   /// Creates a new play button.
   const PlayButton({
     required this.game,
@@ -57,7 +60,7 @@ class PlayButton extends StatelessWidget {
   final DynamicBounceGame game;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         const Text(
@@ -73,7 +76,9 @@ class PlayButton extends StatelessWidget {
           ),
           iconSize: 72,
           onPressed: () {
-            game.playStatus = PlayStatus.playing;
+            ref
+                .read(playStatusProvider.notifier)
+                .updatePlayStatus(PlayStatusType.playing);
           },
         ),
       ],
@@ -82,7 +87,7 @@ class PlayButton extends StatelessWidget {
 }
 
 /// The ranking button.
-class RankingButton extends StatelessWidget {
+class RankingButton extends ConsumerWidget {
   /// Creates a new ranking button.
   const RankingButton({
     required this.game,
@@ -93,21 +98,23 @@ class RankingButton extends StatelessWidget {
   final DynamicBounceGame game;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       icon: const Icon(
         Icons.emoji_events_outlined,
       ),
       iconSize: 72,
       onPressed: () {
-        game.playStatus = PlayStatus.ranking;
+        ref
+            .read(playStatusProvider.notifier)
+            .updatePlayStatus(PlayStatusType.ranking);
       },
     );
   }
 }
 
 /// The user button.
-class UserButton extends StatelessWidget {
+class UserButton extends ConsumerWidget {
   /// Creates a new user button.
   const UserButton({
     required this.game,
@@ -118,21 +125,23 @@ class UserButton extends StatelessWidget {
   final DynamicBounceGame game;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       icon: const Icon(
         Icons.account_circle_outlined,
       ),
       iconSize: 72,
       onPressed: () {
-        game.playStatus = PlayStatus.user;
+        ref
+            .read(playStatusProvider.notifier)
+            .updatePlayStatus(PlayStatusType.user);
       },
     );
   }
 }
 
 /// The settings button.
-class SettingsButton extends StatelessWidget {
+class SettingsButton extends ConsumerWidget {
   /// Creates a new settings button.
   const SettingsButton({
     required this.game,
@@ -143,14 +152,16 @@ class SettingsButton extends StatelessWidget {
   final DynamicBounceGame game;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       icon: const Icon(
         Icons.settings_outlined,
       ),
       iconSize: 72,
       onPressed: () {
-        game.playStatus = PlayStatus.settings;
+        ref
+            .read(playStatusProvider.notifier)
+            .updatePlayStatus(PlayStatusType.settings);
       },
     );
   }

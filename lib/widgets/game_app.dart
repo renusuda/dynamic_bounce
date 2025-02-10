@@ -1,22 +1,25 @@
-import 'package:dynamic_bounce/dynamic_bounce_game.dart';
+import 'package:dynamic_bounce/models/play_status_type.dart';
 import 'package:dynamic_bounce/overlays/home.dart';
 import 'package:dynamic_bounce/overlays/playing.dart';
 import 'package:dynamic_bounce/overlays/ranking.dart';
 import 'package:dynamic_bounce/overlays/score.dart';
 import 'package:dynamic_bounce/overlays/settings.dart';
 import 'package:dynamic_bounce/overlays/user.dart';
-import 'package:flame/game.dart';
+import 'package:dynamic_bounce/providers/game.dart';
+import 'package:flame_riverpod/flame_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The game app.
-class GameApp extends StatelessWidget {
+class GameApp extends ConsumerWidget {
   /// Creates a new game app.
   const GameApp({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final game = ref.watch(gameProvider);
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
@@ -28,15 +31,17 @@ class GameApp extends StatelessWidget {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  child: GameWidget<DynamicBounceGame>.controlled(
-                    gameFactory: DynamicBounceGame.new,
+                  child: RiverpodAwareGameWidget(
+                    key: gameWidgetKey,
+                    game: game,
                     overlayBuilderMap: {
-                      PlayStatus.home.name: (_, game) => Home(game: game),
-                      PlayStatus.playing.name: (_, game) => Playing(game: game),
-                      PlayStatus.score.name: (_, __) => const Score(),
-                      PlayStatus.ranking.name: (_, __) => const Ranking(),
-                      PlayStatus.user.name: (_, __) => const User(),
-                      PlayStatus.settings.name: (_, __) => const Settings(),
+                      PlayStatusType.home.name: (_, __) => Home(game: game),
+                      PlayStatusType.playing.name: (_, __) =>
+                          Playing(game: game),
+                      PlayStatusType.score.name: (_, __) => const Score(),
+                      PlayStatusType.ranking.name: (_, __) => const Ranking(),
+                      PlayStatusType.user.name: (_, __) => const User(),
+                      PlayStatusType.settings.name: (_, __) => const Settings(),
                     },
                   ),
                 ),

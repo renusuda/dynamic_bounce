@@ -6,9 +6,10 @@ import 'package:dynamic_bounce/components/brick.dart';
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The playing overlay.
-class Playing extends StatefulWidget {
+class Playing extends ConsumerStatefulWidget {
   /// Creates a new playing overlay.
   const Playing({
     required this.game,
@@ -19,10 +20,10 @@ class Playing extends StatefulWidget {
   final DynamicBounceGame game;
 
   @override
-  State<Playing> createState() => _PlayingState();
+  ConsumerState<Playing> createState() => _PlayingState();
 }
 
-class _PlayingState extends State<Playing> {
+class _PlayingState extends ConsumerState<Playing> {
   @override
   Widget build(BuildContext context) {
     return Container();
@@ -52,6 +53,7 @@ class _PlayingState extends State<Playing> {
     widget.game.world
       ..add(
         Ball(
+          ref: ref,
           velocity: Vector2(
             velocityX,
             velocityY,

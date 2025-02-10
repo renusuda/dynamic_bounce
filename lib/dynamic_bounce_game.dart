@@ -1,51 +1,22 @@
 import 'dart:async';
 
 import 'package:dynamic_bounce/components/play_area.dart';
+import 'package:dynamic_bounce/models/play_status_type.dart';
+import 'package:dynamic_bounce/providers/play_status.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_riverpod/flame_riverpod.dart';
 import 'package:flutter/material.dart';
-
-/// The status of the game.
-enum PlayStatus {
-  /// Home screen of the game.
-  home,
-
-  /// The game is currently playing.
-  playing,
-
-  /// The score screen after game over.
-  score,
-
-  /// The ranking screen.
-  ranking,
-
-  /// The user details screen.
-  user,
-
-  /// The settings screen.
-  settings,
-}
 
 /// The game instance.
 class DynamicBounceGame extends FlameGame
-    with HasCollisionDetection, TapDetector {
+    with HasCollisionDetection, TapDetector, RiverpodGameMixin {
   /// The width of the game.
   double get width => size.x;
 
   /// The height of the game.
   double get height => size.y;
-
-  /// The status of the game.
-  late PlayStatus _playStatus;
-
-  /// Gets the status of the game.
-  PlayStatus get playStatus => _playStatus;
-
-  set playStatus(PlayStatus playStatus) {
-    _playStatus = playStatus;
-    _switchOverlay(playStatus);
-  }
 
   @override
   FutureOr<void> onLoad() async {
@@ -58,20 +29,32 @@ class DynamicBounceGame extends FlameGame
       PlayArea(),
     );
 
-    playStatus = PlayStatus.home;
+    _switchOverlay(
+      ref.watch(playStatusProvider),
+    );
+  }
+
+  @override
+  void onMount() {
+    addToGameWidgetBuild(() {
+      ref.listen(playStatusProvider, (prev, next) {
+        _switchOverlay(next);
+      });
+    });
+    super.onMount();
   }
 
   /// Switches another overlay.
-  void _switchOverlay(PlayStatus playStatus) {
+  void _switchOverlay(PlayStatusType playStatusType) {
     _removeAllOverlays();
-    overlays.add(playStatus.name);
+    overlays.add(playStatusType.name);
   }
 
   /// Removes all overlays.
   void _removeAllOverlays() {
-    for (final playStatusName in PlayStatus.values) {
-      if (overlays.isActive(playStatusName.name)) {
-        overlays.remove(playStatusName.name);
+    for (final playStatusType in PlayStatusType.values) {
+      if (overlays.isActive(playStatusType.name)) {
+        overlays.remove(playStatusType.name);
       }
     }
   }

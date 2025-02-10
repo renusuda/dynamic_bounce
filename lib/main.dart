@@ -1,6 +1,7 @@
 import 'package:dynamic_bounce/widgets/game_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +11,8 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   runApp(
-    const GameApp(),
+    const ProviderScope(
+      child: GameApp(),
+    ),
   );
 }

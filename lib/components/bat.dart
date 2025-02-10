@@ -38,10 +38,11 @@ class Bat extends PositionComponent
   @override
   void onDragUpdate(DragUpdateEvent event) {
     super.onDragUpdate(event);
-    if (game.playStatus == PlayStatus.playing) {
-      final newPosition = _getNewXPosition(event.localDelta.x);
-      position.x = newPosition;
+    if (!isMounted) {
+      return;
     }
+    final newPosition = _getNewXPosition(event.localDelta.x);
+    position.x = newPosition;
   }
 
   /// Moves the bat by a given horizontal offset with a smooth animation.
