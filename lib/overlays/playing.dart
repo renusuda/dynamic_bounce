@@ -75,9 +75,9 @@ class _PlayingState extends ConsumerState<Playing> {
         Bat(
           position: Vector2(
             widget.game.width / 2,
-            widget.game.height * 0.95,
+            widget.game.height * 0.9,
           ),
-          size: Vector2(120, 10),
+          size: Vector2(120, 25),
         ),
       )
       ..add(
