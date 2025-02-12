@@ -84,7 +84,7 @@ class _PlayingState extends ConsumerState<Playing> {
         Brick(
           position: Vector2(
             widget.game.width / 2,
-            widget.game.height * 0.10,
+            0,
           ),
         ),
       );

@@ -23,27 +23,24 @@ class GameApp extends ConsumerWidget {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Center(
-              child: FittedBox(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: RiverpodAwareGameWidget(
-                    key: gameWidgetKey,
-                    game: game,
-                    overlayBuilderMap: {
-                      PlayStatusType.home.name: (_, __) => Home(game: game),
-                      PlayStatusType.playing.name: (_, __) =>
-                          Playing(game: game),
-                      PlayStatusType.score.name: (_, __) => const Score(),
-                      PlayStatusType.ranking.name: (_, __) => const Ranking(),
-                      PlayStatusType.user.name: (_, __) => const User(),
-                      PlayStatusType.settings.name: (_, __) => const Settings(),
-                    },
-                  ),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Center(
+            child: FittedBox(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: RiverpodAwareGameWidget(
+                  key: gameWidgetKey,
+                  game: game,
+                  overlayBuilderMap: {
+                    PlayStatusType.home.name: (_, __) => Home(game: game),
+                    PlayStatusType.playing.name: (_, __) => Playing(game: game),
+                    PlayStatusType.score.name: (_, __) => const Score(),
+                    PlayStatusType.ranking.name: (_, __) => const Ranking(),
+                    PlayStatusType.user.name: (_, __) => const User(),
+                    PlayStatusType.settings.name: (_, __) => const Settings(),
+                  },
                 ),
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:dynamic_bounce/components/play_area.dart';
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
 import 'package:dynamic_bounce/models/play_status_type.dart';
 import 'package:dynamic_bounce/providers/play_status.dart';
+import 'package:dynamic_bounce/providers/score.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
@@ -79,6 +80,7 @@ class Ball extends CircleComponent
       velocity
         ..y = -velocity.y
         ..scale(speedUpScale);
+      ref.read(scoreProvider.notifier).increment();
     }
   }
 }

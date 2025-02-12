@@ -1,4 +1,3 @@
-import 'package:dynamic_bounce/providers/score.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_riverpod/flame_riverpod.dart';
@@ -33,14 +32,5 @@ class Brick extends PositionComponent
       ),
       _paint,
     );
-  }
-
-  @override
-  void onCollisionStart(
-    Set<Vector2> intersectionPoints,
-    PositionComponent other,
-  ) {
-    super.onCollisionStart(intersectionPoints, other);
-    ref.read(scoreProvider.notifier).increment();
   }
 }
