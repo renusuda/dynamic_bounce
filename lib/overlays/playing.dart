@@ -28,11 +28,18 @@ class _PlayingState extends ConsumerState<Playing> {
   @override
   Widget build(BuildContext context) {
     final score = ref.watch(scoreProvider);
-    return Text(
-      'Score: $score',
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
+    return Center(
+      child: Column(
+        children: [
+          const Spacer(),
+          Text(
+            '$score',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 32,
+            ),
+          ),
+        ],
       ),
     );
   }

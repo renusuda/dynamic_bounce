@@ -55,11 +55,14 @@ class Bat extends PositionComponent
     );
   }
 
-  /// Returns the new Y position within the lower half of the game screen.
+  /// Returns a new Y position within the lower half of the game screen
+  /// that doesn't overlap the score text.
   double _getNewYPosition(double dy) {
+    final upperLimit = game.height * 0.5;
+    final lowerLimit = game.height * 0.925;
     return (position.y + dy).clamp(
-      game.height / 2,
-      game.height,
+      upperLimit,
+      lowerLimit,
     );
   }
 }
