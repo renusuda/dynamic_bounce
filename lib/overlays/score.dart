@@ -1,6 +1,7 @@
-import 'package:dynamic_bounce/models/play_status_type.dart';
-import 'package:dynamic_bounce/providers/play_status.dart';
 import 'package:dynamic_bounce/providers/score.dart';
+import 'package:dynamic_bounce/widgets/buttons/home_button.dart';
+import 'package:dynamic_bounce/widgets/buttons/play_again_button.dart';
+import 'package:dynamic_bounce/widgets/buttons/ranking_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,78 +41,6 @@ class Score extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-/// The play again button.
-class PlayAgainButton extends StatelessWidget {
-  /// Creates a new play again button.
-  const PlayAgainButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text(
-          'PLAY AGAIN',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 36,
-          ),
-        ),
-        IconButton(
-          icon: const Icon(
-            Icons.replay,
-          ),
-          iconSize: 72,
-          onPressed: () {},
-        ),
-      ],
-    );
-  }
-}
-
-/// The ranking button.
-class RankingButton extends ConsumerWidget {
-  /// Creates a new ranking button.
-  const RankingButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return IconButton(
-      icon: const Icon(
-        Icons.emoji_events_outlined,
-      ),
-      iconSize: 72,
-      onPressed: () {
-        ref
-            .read(playStatusProvider.notifier)
-            .updatePlayStatus(PlayStatusType.ranking);
-      },
-    );
-  }
-}
-
-/// The home button.
-class HomeButton extends StatelessWidget {
-  /// Creates a new home button.
-  const HomeButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(
-        Icons.home_outlined,
-      ),
-      iconSize: 72,
-      onPressed: () {},
     );
   }
 }
