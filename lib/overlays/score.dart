@@ -6,33 +6,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The score overlay.
-class Score extends ConsumerWidget {
+class Score extends StatelessWidget {
   /// Creates a new score overlay.
   const Score({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final score = ref.watch(scoreProvider);
-    return Center(
+  Widget build(BuildContext context) {
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           /// The score result.
-          Text(
-            '$score',
-            style: const TextStyle(
-              fontSize: 72,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          ScoreResult(),
 
           /// The play again button.
-          const PlayAgainButton(),
+          PlayAgainButton(),
 
           /// The icon buttons.
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               RankingButton(),
@@ -40,6 +33,26 @@ class Score extends ConsumerWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// The score result.
+class ScoreResult extends ConsumerWidget {
+  /// Creates a new score result.
+  const ScoreResult({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final score = ref.watch(scoreProvider);
+    return Text(
+      '$score',
+      style: const TextStyle(
+        fontSize: 72,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
