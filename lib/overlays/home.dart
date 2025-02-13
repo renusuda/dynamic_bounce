@@ -1,4 +1,3 @@
-import 'package:dynamic_bounce/dynamic_bounce_game.dart';
 import 'package:dynamic_bounce/models/play_status_type.dart';
 import 'package:dynamic_bounce/providers/play_status.dart';
 import 'package:flutter/material.dart';
@@ -8,21 +7,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class Home extends StatelessWidget {
   /// Creates a new home overlay.
   const Home({
-    required this.game,
     super.key,
   });
 
-  /// The game instance.
-  final DynamicBounceGame game;
-
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           /// The title of the game.
-          const Text(
+          Text(
             'DYNAMIC BOUNCE',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -31,15 +26,15 @@ class Home extends StatelessWidget {
           ),
 
           /// The play button.
-          PlayButton(game: game),
+          PlayButton(),
 
           /// The icon buttons.
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              RankingButton(game: game),
-              UserButton(game: game),
-              SettingsButton(game: game),
+              RankingButton(),
+              UserButton(),
+              SettingsButton(),
             ],
           ),
         ],
@@ -52,12 +47,8 @@ class Home extends StatelessWidget {
 class PlayButton extends ConsumerWidget {
   /// Creates a new play button.
   const PlayButton({
-    required this.game,
     super.key,
   });
-
-  /// The game instance.
-  final DynamicBounceGame game;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -90,12 +81,8 @@ class PlayButton extends ConsumerWidget {
 class RankingButton extends ConsumerWidget {
   /// Creates a new ranking button.
   const RankingButton({
-    required this.game,
     super.key,
   });
-
-  /// The game instance.
-  final DynamicBounceGame game;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -117,12 +104,8 @@ class RankingButton extends ConsumerWidget {
 class UserButton extends ConsumerWidget {
   /// Creates a new user button.
   const UserButton({
-    required this.game,
     super.key,
   });
-
-  /// The game instance.
-  final DynamicBounceGame game;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -144,12 +127,8 @@ class UserButton extends ConsumerWidget {
 class SettingsButton extends ConsumerWidget {
   /// Creates a new settings button.
   const SettingsButton({
-    required this.game,
     super.key,
   });
-
-  /// The game instance.
-  final DynamicBounceGame game;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

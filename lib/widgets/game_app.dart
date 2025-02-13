@@ -34,7 +34,7 @@ class GameApp extends ConsumerWidget {
                   key: gameWidgetKey,
                   game: game,
                   overlayBuilderMap: {
-                    PlayStatusType.home.name: (_, __) => Home(game: game),
+                    PlayStatusType.home.name: (_, __) => const Home(),
                     PlayStatusType.playing.name: (_, __) => Playing(game: game),
                     PlayStatusType.score.name: (_, __) => const Score(),
                     PlayStatusType.ranking.name: (_, __) => const Ranking(),
