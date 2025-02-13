@@ -18,13 +18,7 @@ class Home extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           /// The title of the game.
-          Text(
-            'DYNAMIC BOUNCE',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 36,
-            ),
-          ),
+          GameTitle(),
 
           /// The play button.
           PlayButton(),
@@ -39,6 +33,25 @@ class Home extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// The title of the game.
+class GameTitle extends StatelessWidget {
+  /// Creates a new game title.
+  const GameTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'DYNAMIC BOUNCE',
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 36,
       ),
     );
   }
