@@ -17,13 +17,8 @@ class Home extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          /// The title of the game.
           GameTitle(),
-
-          /// The play button.
           PlayButton(),
-
-          /// The icon buttons.
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

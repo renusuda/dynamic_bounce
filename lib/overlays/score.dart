@@ -18,13 +18,8 @@ class Score extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          /// The score result.
           ScoreResult(),
-
-          /// The play again button.
           PlayAgainButton(),
-
-          /// The icon buttons.
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
