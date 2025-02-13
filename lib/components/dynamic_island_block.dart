@@ -3,15 +3,14 @@ import 'package:flame/components.dart';
 import 'package:flame_riverpod/flame_riverpod.dart';
 import 'package:flutter/material.dart';
 
-// TODO(me): Update this class to dynamic island.
-/// The brick of the game.
-class Brick extends PositionComponent
+/// The block under dynamic island.
+class DynamicIslandBlock extends PositionComponent
     with CollisionCallbacks, RiverpodComponentMixin {
-  /// Creates a new brick.
-  Brick({
+  /// Creates a new block under dynamic island.
+  DynamicIslandBlock({
     required super.position,
   }) : super(
-          size: Vector2(120, 35),
+          size: Vector2(130, 28),
           anchor: Anchor.center,
           children: [
             RectangleHitbox(),
@@ -28,7 +27,7 @@ class Brick extends PositionComponent
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Offset.zero & size.toSize(),
-        const Radius.circular(25),
+        const Radius.circular(20),
       ),
       _paint,
     );

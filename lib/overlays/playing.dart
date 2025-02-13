@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:dynamic_bounce/components/ball.dart';
 import 'package:dynamic_bounce/components/bat.dart';
-import 'package:dynamic_bounce/components/brick.dart';
+import 'package:dynamic_bounce/components/dynamic_island_block.dart';
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
 import 'package:dynamic_bounce/providers/score.dart';
 import 'package:flame/components.dart';
@@ -88,7 +88,7 @@ class _PlayingState extends ConsumerState<Playing> {
         ),
       )
       ..add(
-        Brick(
+        DynamicIslandBlock(
           position: Vector2(
             widget.game.width / 2,
             0,
@@ -110,7 +110,7 @@ class _PlayingState extends ConsumerState<Playing> {
         widget.game.world.children.query<Bat>(),
       )
       ..removeAll(
-        widget.game.world.children.query<Brick>(),
+        widget.game.world.children.query<DynamicIslandBlock>(),
       );
   }
 }

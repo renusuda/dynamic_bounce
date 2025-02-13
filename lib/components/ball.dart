@@ -1,5 +1,5 @@
 import 'package:dynamic_bounce/components/bat.dart';
-import 'package:dynamic_bounce/components/brick.dart';
+import 'package:dynamic_bounce/components/dynamic_island_block.dart';
 import 'package:dynamic_bounce/components/play_area.dart';
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
 import 'package:dynamic_bounce/models/play_status_type.dart';
@@ -75,7 +75,7 @@ class Ball extends CircleComponent
       }
     } else if (other is Bat) {
       velocity.y = -velocity.y;
-    } else if (other is Brick) {
+    } else if (other is DynamicIslandBlock) {
       const speedUpScale = 1.1;
       velocity
         ..y = -velocity.y
