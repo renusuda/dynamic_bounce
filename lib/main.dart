@@ -12,6 +12,7 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await initializeFirebaseApp();
+  await signInAnonymously();
   runApp(
     const ProviderScope(
       child: GameApp(),
