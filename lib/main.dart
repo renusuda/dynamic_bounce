@@ -1,3 +1,4 @@
+import 'package:dynamic_bounce/firebase.dart';
 import 'package:dynamic_bounce/widgets/game_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +11,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  await initializeFirebaseApp();
   runApp(
     const ProviderScope(
       child: GameApp(),
