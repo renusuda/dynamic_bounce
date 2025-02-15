@@ -1,10 +1,18 @@
 {
   "configurations": [
     {
-      "name": "Run app",
+      "name": "Run app in development",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "debug"
+      "flutterMode": "debug",
+      "args": ["--flavor", "dev"]
+    },
+    {
+      "name": "Run app in production",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "args": ["--flavor", "prod"]
     }
   ]
 }
