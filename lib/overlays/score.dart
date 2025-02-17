@@ -6,11 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The score overlay.
-class Score extends StatelessWidget {
+class Score extends ConsumerStatefulWidget {
   /// Creates a new score overlay.
   const Score({
     super.key,
   });
+
+  @override
+  ConsumerState<Score> createState() => _ScoreState();
+}
+
+class _ScoreState extends ConsumerState<Score> {
+  @override
+  void initState() {
+    super.initState();
+    final score = ref.read(scoreProvider);
+    ref.read(scoreProvider.notifier).upsert(score);
+  }
 
   @override
   Widget build(BuildContext context) {
