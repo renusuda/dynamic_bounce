@@ -19,7 +19,10 @@ class Score extends _$Score {
   /// upsert score
   Future<void> upsert(int score) async {
     if (score < 1) return;
-    // TODO: upsert when achieving the best score.
-    await ref.watch(scoreServiceProvider).upsertScore(score);
+    final bestScore = await ref.watch(scoreServiceProvider).getBestScore();
+    if (score > bestScore) {
+      await ref.watch(scoreServiceProvider).updateBestScore(score);
+      await ref.watch(scoreServiceProvider).upsertScore(score);
+    }
   }
 }
