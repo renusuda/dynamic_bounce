@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dynamic_bounce/models/player_score.dart';
 import 'package:dynamic_bounce/repositories/local_database.dart';
 import 'package:dynamic_bounce/repositories/user_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -45,7 +46,7 @@ class ScoreService {
   /// Get the best score.
   Future<int> getBestScore() async {
     final db = await instance.database;
-    final userId = await ref.watch(userServiceProvider).getUserId();
+    final userId = await ref.read(userServiceProvider).getUserId();
     final result = await db.query(
       _tableName,
       columns: [
@@ -60,7 +61,7 @@ class ScoreService {
   /// Update the best score.
   Future<void> updateBestScore(int score) async {
     final db = await instance.database;
-    final userId = await ref.watch(userServiceProvider).getUserId();
+    final userId = await ref.read(userServiceProvider).getUserId();
     await db.update(
       _tableName,
       {
@@ -71,9 +72,32 @@ class ScoreService {
     );
   }
 
+  /// Get the score in the top 100.
+  Future<List<PlayerScore>> getTopPlayerScores() async {
+    final playerScoresRef = FirebaseFirestore.instance
+        .collection('scores')
+        .withConverter<PlayerScore>(
+          fromFirestore: (snapshot, _) => PlayerScore.fromJson(
+            json: snapshot.data()!,
+            id: snapshot.id,
+          ),
+          toFirestore: (playerScore, _) => playerScore.toJson(),
+        );
+
+    final response = await playerScoresRef
+        .orderBy('score', descending: true)
+        .orderBy('updatedAt', descending: true)
+        .limit(100)
+        .get();
+
+    final topPlayerScores = response.docs.map((doc) => doc.data()).toList();
+
+    return topPlayerScores;
+  }
+
   /// Upsert the score.
   Future<void> upsertScore(int score) async {
-    final userId = await ref.watch(userServiceProvider).getUserId();
+    final userId = await ref.read(userServiceProvider).getUserId();
     await FirebaseFirestore.instance
         .collection('scores')
         .doc(userId)
