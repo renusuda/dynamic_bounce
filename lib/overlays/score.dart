@@ -1,3 +1,4 @@
+import 'package:dynamic_bounce/models/score_result_type.dart';
 import 'package:dynamic_bounce/providers/score.dart';
 import 'package:dynamic_bounce/widgets/buttons/home_button.dart';
 import 'package:dynamic_bounce/widgets/buttons/play_again_button.dart';
@@ -20,8 +21,44 @@ class _ScoreState extends ConsumerState<Score> {
   @override
   void initState() {
     super.initState();
-    final score = ref.read(scoreProvider);
-    ref.read(scoreProvider.notifier).upsert(score);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final score = ref.read(scoreProvider);
+      final scoreResult = await ref.read(scoreProvider.notifier).upsert(score);
+      if (!mounted) return;
+      switch (scoreResult) {
+        case ScoreResultType.best:
+          _showSnackBar(
+            context,
+            'New Best Score🎉',
+          );
+        case ScoreResultType.ranking:
+          _showSnackBar(
+            context,
+            "You're in the top rankings🏆",
+          );
+        case ScoreResultType.normal:
+          break;
+      }
+    });
+  }
+
+  void _showSnackBar(
+    BuildContext context,
+    String message,
+  ) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Center(
+          child: Text(
+            message,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
