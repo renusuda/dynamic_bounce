@@ -40,7 +40,7 @@ class Score extends _$Score {
     final topScores = await ref.read(scoreServiceProvider).getTopPlayerScores();
     final userId = await ref.read(userServiceProvider).getUserId();
     final myRankingScore = topScores.firstWhereOrNull(
-      (score) => score.userId == userId,
+      (score) => score.user.id == userId,
     );
     return myRankingScore != null;
   }

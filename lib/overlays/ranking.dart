@@ -83,7 +83,7 @@ class RankingScores extends ConsumerWidget {
                 children: [
                   RankText(value: rankedPlayerScore.rank),
                   const SizedBox(width: 15),
-                  const UserNameText(),
+                  UserNameText(userName: rankedPlayerScore.user.name),
                   const Spacer(),
                   ScoreText(value: rankedPlayerScore.score),
                 ],
@@ -127,14 +127,18 @@ class RankText extends StatelessWidget {
 class UserNameText extends StatelessWidget {
   /// Creates a new user name text.
   const UserNameText({
+    required this.userName,
     super.key,
   });
 
+  /// User name.
+  final String userName;
+
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Unknown',
-      style: TextStyle(
+    return Text(
+      userName,
+      style: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w500,
       ),

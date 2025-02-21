@@ -1,3 +1,4 @@
+import 'package:dynamic_bounce/models/user.dart';
 import 'package:dynamic_bounce/repositories/local_database.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,14 +13,17 @@ UserService userService(Ref ref) {
 
 /// The user service.
 class UserService {
-  /// The instance of the local database.
+  /// Local database instance.
   static final instance = LocalDatabase();
 
-  /// The table name.
+  /// Table name.
   static const _tableName = LocalDatabase.tableName;
 
-  /// The column name for the user id.
+  /// User ID column.
   static const _columnUserId = LocalDatabase.columnUserId;
+
+  /// User name column.
+  static const _columnUserName = LocalDatabase.columnUserName;
 
   /// Get the user id.
   Future<String> getUserId() async {
@@ -31,5 +35,20 @@ class UserService {
       ],
     );
     return result.first[_columnUserId]! as String;
+  }
+
+  /// Get the user.
+  Future<User> getUser() async {
+    final db = await instance.database;
+    final result = await db.query(
+      _tableName,
+      columns: [
+        _columnUserId,
+        _columnUserName,
+      ],
+    );
+    return User.fromJson(
+      json: result.first,
+    );
   }
 }

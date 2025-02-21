@@ -9,15 +9,18 @@ class LocalDatabase {
   LocalDatabase._internal();
   static final _instance = LocalDatabase._internal();
   static const _databaseName = 'app_database.db';
-  static const _databaseVersion = 1;
+  static const _databaseVersion = 2;
 
-  /// The table name.
+  /// Table name.
   static const tableName = 'dynamic_bounce';
 
-  /// The column name for the user id.
-  static const columnUserId = 'userId';
+  /// User ID column.
+  static const columnUserId = 'id';
 
-  /// The column name for the best score.
+  /// User name column.
+  static const columnUserName = 'name';
+
+  /// Best score column.
   static const columnBestScore = 'bestScore';
 
   Database? _database;
@@ -43,6 +46,7 @@ class LocalDatabase {
           await db.execute('''
           CREATE TABLE $tableName (
             $columnUserId TEXT PRIMARY KEY,
+            $columnUserName TEXT NOT NULL,
             $columnBestScore INTEGER NOT NULL
           )
         ''');
@@ -51,6 +55,7 @@ class LocalDatabase {
             tableName,
             {
               columnUserId: userId,
+              columnUserName: 'Unknown',
               columnBestScore: 0,
             },
           );

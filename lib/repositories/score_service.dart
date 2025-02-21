@@ -25,16 +25,16 @@ class ScoreService {
     required this.firestore,
   });
 
-  /// The instance of the local database.
+  /// Local database instance.
   static final instance = LocalDatabase();
 
-  /// The table name.
+  /// Table name.
   static const _tableName = LocalDatabase.tableName;
 
-  /// The column name for the user id.
+  /// User ID column.
   static const _columnUserId = LocalDatabase.columnUserId;
 
-  /// The column name for the best score.
+  /// Best score column.
   static const _columnBestScore = LocalDatabase.columnBestScore;
 
   /// The reference.
@@ -97,11 +97,12 @@ class ScoreService {
 
   /// Upsert the score.
   Future<void> upsertScore(int score) async {
-    final userId = await ref.read(userServiceProvider).getUserId();
+    final user = await ref.read(userServiceProvider).getUser();
     await FirebaseFirestore.instance
         .collection('scores')
-        .doc(userId)
+        .doc(user.id)
         .set(<String, dynamic>{
+      'name': user.name,
       'score': score,
       'updatedAt': FieldValue.serverTimestamp(),
     });

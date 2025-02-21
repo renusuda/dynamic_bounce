@@ -7,7 +7,7 @@ part of 'ranked_player_scores.dart';
 // **************************************************************************
 
 String _$rankedPlayerScoresHash() =>
-    r'd8f75b84d916ab7a492c1824f7793cd80f45ef4b';
+    r'b71c06e9d11006d4c9b2b2bd10088a82f5c46763';
 
 /// Ranked player scores provider
 ///
