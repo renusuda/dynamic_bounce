@@ -1,10 +1,10 @@
 import 'package:dynamic_bounce/models/play_status_type.dart';
 import 'package:dynamic_bounce/overlays/home.dart';
+import 'package:dynamic_bounce/overlays/player.dart';
 import 'package:dynamic_bounce/overlays/playing.dart';
 import 'package:dynamic_bounce/overlays/ranking.dart';
 import 'package:dynamic_bounce/overlays/score.dart';
 import 'package:dynamic_bounce/overlays/settings.dart';
-import 'package:dynamic_bounce/overlays/user.dart';
 import 'package:dynamic_bounce/providers/game.dart';
 import 'package:flame_riverpod/flame_riverpod.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class GameApp extends ConsumerWidget {
                     PlayStatusType.playing.name: (_, __) => Playing(game: game),
                     PlayStatusType.score.name: (_, __) => const Score(),
                     PlayStatusType.ranking.name: (_, __) => const Ranking(),
-                    PlayStatusType.user.name: (_, __) => const User(),
+                    PlayStatusType.player.name: (_, __) => const Player(),
                     PlayStatusType.settings.name: (_, __) => const Settings(),
                   },
                 ),

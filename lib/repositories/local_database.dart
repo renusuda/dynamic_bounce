@@ -14,11 +14,11 @@ class LocalDatabase {
   /// Table name.
   static const tableName = 'dynamic_bounce';
 
-  /// User ID column.
-  static const columnUserId = 'id';
+  /// Player ID column.
+  static const columnPlayerId = 'id';
 
-  /// User name column.
-  static const columnUserName = 'name';
+  /// Player name column.
+  static const columnPlayerName = 'name';
 
   /// Best score column.
   static const columnBestScore = 'bestScore';
@@ -38,24 +38,24 @@ class LocalDatabase {
       final dbPath = await getDatabasesPath();
       final path = join(dbPath, _databaseName);
       final auth = FirebaseAuth.instance;
-      final userId = auth.currentUser!.uid;
+      final playerId = auth.currentUser!.uid;
       return openDatabase(
         path,
         version: _databaseVersion,
         onCreate: (db, _) async {
           await db.execute('''
           CREATE TABLE $tableName (
-            $columnUserId TEXT PRIMARY KEY,
-            $columnUserName TEXT NOT NULL,
+            $columnPlayerId TEXT PRIMARY KEY,
+            $columnPlayerName TEXT NOT NULL,
             $columnBestScore INTEGER NOT NULL
           )
         ''');
-          // Insert a record for the initial user.
+          // Insert a record for the initial player.
           await db.insert(
             tableName,
             {
-              columnUserId: userId,
-              columnUserName: 'Unknown',
+              columnPlayerId: playerId,
+              columnPlayerName: 'Unknown',
               columnBestScore: 0,
             },
           );

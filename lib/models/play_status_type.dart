@@ -12,8 +12,8 @@ enum PlayStatusType {
   /// The ranking screen.
   ranking,
 
-  /// The user details screen.
-  user,
+  /// The player details screen.
+  player,
 
   /// The settings screen.
   settings,

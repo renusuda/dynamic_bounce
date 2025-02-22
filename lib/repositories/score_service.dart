@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_bounce/models/player_score.dart';
 import 'package:dynamic_bounce/repositories/local_database.dart';
-import 'package:dynamic_bounce/repositories/user_service.dart';
+import 'package:dynamic_bounce/repositories/player_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -31,8 +31,8 @@ class ScoreService {
   /// Table name.
   static const _tableName = LocalDatabase.tableName;
 
-  /// User ID column.
-  static const _columnUserId = LocalDatabase.columnUserId;
+  /// Player ID column.
+  static const _columnPlayerId = LocalDatabase.columnPlayerId;
 
   /// Best score column.
   static const _columnBestScore = LocalDatabase.columnBestScore;
@@ -46,14 +46,14 @@ class ScoreService {
   /// Get the best score.
   Future<int> getBestScore() async {
     final db = await instance.database;
-    final userId = await ref.read(userServiceProvider).getUserId();
+    final playerId = await ref.read(playerServiceProvider).getPlayerId();
     final result = await db.query(
       _tableName,
       columns: [
         _columnBestScore,
       ],
-      where: '$_columnUserId = ?',
-      whereArgs: [userId],
+      where: '$_columnPlayerId = ?',
+      whereArgs: [playerId],
     );
     return result.first[_columnBestScore]! as int;
   }
@@ -61,14 +61,14 @@ class ScoreService {
   /// Update the best score.
   Future<void> updateBestScore(int score) async {
     final db = await instance.database;
-    final userId = await ref.read(userServiceProvider).getUserId();
+    final playerId = await ref.read(playerServiceProvider).getPlayerId();
     await db.update(
       _tableName,
       {
         _columnBestScore: score,
       },
-      where: '$_columnUserId = ?',
-      whereArgs: [userId],
+      where: '$_columnPlayerId = ?',
+      whereArgs: [playerId],
     );
   }
 
@@ -97,12 +97,12 @@ class ScoreService {
 
   /// Upsert the score.
   Future<void> upsertScore(int score) async {
-    final user = await ref.read(userServiceProvider).getUser();
+    final player = await ref.read(playerServiceProvider).getPlayer();
     await FirebaseFirestore.instance
         .collection('scores')
-        .doc(user.id)
+        .doc(player.id)
         .set(<String, dynamic>{
-      'name': user.name,
+      'name': player.name,
       'score': score,
       'updatedAt': FieldValue.serverTimestamp(),
     });

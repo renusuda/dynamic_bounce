@@ -4,10 +4,10 @@ import 'package:dynamic_bounce/widgets/buttons/common_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// The user button.
-class UserButton extends ConsumerWidget {
-  /// Creates a new user button.
-  const UserButton({
+/// The player button.
+class PlayerButton extends ConsumerWidget {
+  /// Creates a new player button.
+  const PlayerButton({
     super.key,
   });
 
@@ -18,7 +18,7 @@ class UserButton extends ConsumerWidget {
       onPressed: () {
         ref
             .read(playStatusProvider.notifier)
-            .updatePlayStatus(PlayStatusType.user);
+            .updatePlayStatus(PlayStatusType.player);
       },
     );
   }

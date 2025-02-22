@@ -1,24 +1,24 @@
-/// User information.
-class User {
-  /// Creates a new user instance.
-  const User({
+/// Player information.
+class Player {
+  /// Creates a new player instance.
+  const Player({
     required this.id,
     required this.name,
   });
 
-  /// Creates a new user from a JSON map.
-  User.fromJson({
+  /// Creates a new player from a JSON map.
+  Player.fromJson({
     required Map<String, dynamic> json,
   })  : id = json['id'] as String,
         name = json['name'] as String;
 
-  /// User ID.
+  /// Player ID.
   final String id;
 
-  /// User name.
+  /// Player name.
   final String name;
 
-  /// Converts this user to a JSON map.
+  /// Converts this player to a JSON map.
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,

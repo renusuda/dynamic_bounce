@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:dynamic_bounce/models/score_result_type.dart';
+import 'package:dynamic_bounce/repositories/player_service.dart';
 import 'package:dynamic_bounce/repositories/score_service.dart';
-import 'package:dynamic_bounce/repositories/user_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'score.g.dart';
@@ -38,9 +38,9 @@ class Score extends _$Score {
   /// check if the score is in the top 100
   Future<bool> isInTopHundred() async {
     final topScores = await ref.read(scoreServiceProvider).getTopPlayerScores();
-    final userId = await ref.read(userServiceProvider).getUserId();
+    final playerId = await ref.read(playerServiceProvider).getPlayerId();
     final myRankingScore = topScores.firstWhereOrNull(
-      (score) => score.user.id == userId,
+      (score) => score.player.id == playerId,
     );
     return myRankingScore != null;
   }

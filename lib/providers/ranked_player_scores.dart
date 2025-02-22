@@ -37,7 +37,7 @@ class RankedPlayerScores extends _$RankedPlayerScores {
       }
       rankedScores.add(
         RankedPlayerScore(
-          user: scores[i].user,
+          player: scores[i].player,
           score: scores[i].score,
           rank: currentRank,
         ),

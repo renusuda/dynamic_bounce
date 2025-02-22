@@ -1,10 +1,10 @@
-import 'package:dynamic_bounce/models/user.dart';
+import 'package:dynamic_bounce/models/player.dart';
 
 /// player score
 class PlayerScore {
   /// Creates a new player score.
   const PlayerScore({
-    required this.user,
+    required this.player,
     required this.score,
   });
 
@@ -12,22 +12,22 @@ class PlayerScore {
   PlayerScore.fromJson({
     required Map<String, dynamic> json,
     required String id,
-  })  : user = User(
+  })  : player = Player(
           id: id,
           name: json['name'] as String,
         ),
         score = json['score'] as int;
 
-  /// The user id.
-  final User user;
+  /// The player id.
+  final Player player;
 
   /// The score.
   final int score;
 
   /// Converts this player score to a JSON map.
   Map<String, dynamic> toJson() => {
-        'id': user.id,
-        'name': user.name,
+        'id': player.id,
+        'name': player.name,
         'score': score,
       };
 }
