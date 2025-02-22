@@ -9,12 +9,10 @@ class Player extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Text(
         'PLAYER',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
     );
   }

@@ -34,10 +34,7 @@ class _PlayingState extends ConsumerState<Playing> {
           const Spacer(),
           Text(
             '$score',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 32,
-            ),
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
         ],
       ),

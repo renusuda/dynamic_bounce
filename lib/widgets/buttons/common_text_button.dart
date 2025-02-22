@@ -25,10 +25,7 @@ class CommonTextButton extends StatelessWidget {
       children: [
         Text(
           text,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 36,
-          ),
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         IconButton(
           icon: Icon(icon),

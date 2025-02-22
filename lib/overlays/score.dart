@@ -51,10 +51,7 @@ class _ScoreState extends ConsumerState<Score> {
         content: Center(
           child: Text(
             message,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
       ),
@@ -94,10 +91,7 @@ class ScoreResult extends ConsumerWidget {
     final score = ref.watch(scoreProvider);
     return Text(
       '$score',
-      style: const TextStyle(
-        fontSize: 72,
-        fontWeight: FontWeight.bold,
-      ),
+      style: Theme.of(context).textTheme.displayLarge,
     );
   }
 }

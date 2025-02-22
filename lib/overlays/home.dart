@@ -42,12 +42,9 @@ class GameTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
+    return Text(
       'DYNAMIC BOUNCE',
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 36,
-      ),
+      style: Theme.of(context).textTheme.headlineLarge,
     );
   }
 }

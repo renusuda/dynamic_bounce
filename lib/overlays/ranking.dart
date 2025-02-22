@@ -114,10 +114,7 @@ class RankText extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         '$value',
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
     );
   }
@@ -138,10 +135,7 @@ class PlayerNameText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       playerName,
-      style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-      ),
+      style: Theme.of(context).textTheme.bodyLarge,
     );
   }
 }
@@ -161,11 +155,7 @@ class ScoreText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '$value',
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 12,
-        color: Colors.black,
-      ),
+      style: Theme.of(context).textTheme.bodySmall,
     );
   }
 }

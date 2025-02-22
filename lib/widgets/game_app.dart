@@ -6,6 +6,7 @@ import 'package:dynamic_bounce/overlays/ranking.dart';
 import 'package:dynamic_bounce/overlays/score.dart';
 import 'package:dynamic_bounce/overlays/settings.dart';
 import 'package:dynamic_bounce/providers/game.dart';
+import 'package:dynamic_bounce/theme.dart';
 import 'package:flame_riverpod/flame_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,7 @@ class GameApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final game = ref.watch(gameProvider);
     return MaterialApp(
+      theme: textTheme,
       home: Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
