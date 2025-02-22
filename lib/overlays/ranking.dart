@@ -1,5 +1,6 @@
 import 'package:dynamic_bounce/models/play_status_type.dart';
 import 'package:dynamic_bounce/providers/play_status.dart';
+import 'package:dynamic_bounce/providers/player.dart';
 import 'package:dynamic_bounce/providers/ranked_player_scores.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +21,7 @@ class _RankingState extends ConsumerState<Ranking> {
   void initState() {
     super.initState();
     ref.read(rankedPlayerScoresProvider.notifier).updateLatest();
+    ref.read(playerProvider.notifier).fetchPlayer();
   }
 
   @override
@@ -70,6 +72,7 @@ class RankingScores extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rankedPlayerScores = ref.watch(rankedPlayerScoresProvider);
+    final player = ref.watch(playerProvider);
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -83,7 +86,10 @@ class RankingScores extends ConsumerWidget {
                 children: [
                   RankText(value: rankedPlayerScore.rank),
                   const SizedBox(width: 15),
-                  PlayerNameText(playerName: rankedPlayerScore.player.name),
+                  PlayerNameText(
+                    playerName: rankedPlayerScore.player.name,
+                    isMyScore: rankedPlayerScore.player.id == player.id,
+                  ),
                   const Spacer(),
                   ScoreText(value: rankedPlayerScore.score),
                 ],
@@ -125,17 +131,23 @@ class PlayerNameText extends StatelessWidget {
   /// Creates a new player name text.
   const PlayerNameText({
     required this.playerName,
+    required this.isMyScore,
     super.key,
   });
 
   /// Player name.
   final String playerName;
 
+  /// Whether the player is current player.
+  final bool isMyScore;
+
   @override
   Widget build(BuildContext context) {
     return Text(
       playerName,
-      style: Theme.of(context).textTheme.bodyLarge,
+      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            color: isMyScore ? Colors.deepOrangeAccent : null,
+          ),
     );
   }
 }

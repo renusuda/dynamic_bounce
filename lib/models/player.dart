@@ -12,6 +12,11 @@ class Player {
   })  : id = json['id'] as String,
         name = json['name'] as String;
 
+  /// Creates a default player.
+  const Player.init()
+      : id = '',
+        name = 'Unknown';
+
   /// Player ID.
   final String id;
 
