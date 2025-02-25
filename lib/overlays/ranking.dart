@@ -20,7 +20,6 @@ class _RankingState extends ConsumerState<Ranking> {
   void initState() {
     super.initState();
     ref.read(rankedPlayerScoresProvider.notifier).updateLatest();
-    ref.read(playerProvider.notifier).fetchPlayer();
   }
 
   @override
@@ -45,32 +44,42 @@ class RankingScores extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final rankedPlayerScores = ref.watch(rankedPlayerScoresProvider);
     final player = ref.watch(playerProvider);
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView.builder(
-          itemCount: rankedPlayerScores.length,
-          itemBuilder: (context, index) {
-            final rankedPlayerScore = rankedPlayerScores[index];
-            return Container(
-              margin: const EdgeInsets.only(bottom: 15),
-              child: Row(
-                children: [
-                  RankText(value: rankedPlayerScore.rank),
-                  const SizedBox(width: 15),
-                  PlayerNameText(
-                    playerName: rankedPlayerScore.player.name,
-                    isMyScore: rankedPlayerScore.player.id == player.id,
+    return switch (player) {
+      AsyncData(:final value) => Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ListView.builder(
+              itemCount: rankedPlayerScores.length,
+              itemBuilder: (context, index) {
+                final rankedPlayerScore = rankedPlayerScores[index];
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 15),
+                  child: Row(
+                    children: [
+                      RankText(value: rankedPlayerScore.rank),
+                      const SizedBox(width: 15),
+                      PlayerNameText(
+                        playerName: rankedPlayerScore.player.name,
+                        isMyScore: rankedPlayerScore.player.id == value.id,
+                      ),
+                      const Spacer(),
+                      ScoreText(value: rankedPlayerScore.score),
+                    ],
                   ),
-                  const Spacer(),
-                  ScoreText(value: rankedPlayerScore.score),
-                ],
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
-      ),
-    );
+      AsyncError() => const Center(
+          child: Text('Error occurred.'),
+        ),
+      _ => const Flexible(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+    };
   }
 }
 

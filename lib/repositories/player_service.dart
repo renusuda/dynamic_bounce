@@ -51,4 +51,18 @@ class PlayerService {
       json: result.first,
     );
   }
+
+  /// Update the player.
+  Future<void> updatePlayer(String playerName) async {
+    final db = await instance.database;
+    final playerId = await getPlayerId();
+    await db.update(
+      _tableName,
+      {
+        _columnPlayerName: playerName,
+      },
+      where: '$_columnPlayerId = ?',
+      whereArgs: [playerId],
+    );
+  }
 }

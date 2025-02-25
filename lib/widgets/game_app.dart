@@ -25,6 +25,7 @@ class GameApp extends ConsumerWidget {
       theme: textTheme,
       home: Scaffold(
         backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: false,
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Center(

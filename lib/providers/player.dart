@@ -11,11 +11,16 @@ class Player extends _$Player {
   static final _playerService = PlayerService();
 
   @override
-  player_model.Player build() => const player_model.Player.init();
+  Future<player_model.Player> build() => fetchPlayer();
 
   /// Fetches the player info from local storage.
-  Future<void> fetchPlayer() async {
+  Future<player_model.Player> fetchPlayer() async {
     final response = await _playerService.getPlayer();
-    state = response;
+    return response;
+  }
+
+  /// Updates the player info in local storage.
+  Future<void> updatePlayerName(String playerName) async {
+    await _playerService.updatePlayer(playerName);
   }
 }
