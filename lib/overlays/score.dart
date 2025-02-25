@@ -51,7 +51,9 @@ class _ScoreState extends ConsumerState<Score> {
         content: Center(
           child: Text(
             message,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Colors.white,
+                ),
           ),
         ),
       ),

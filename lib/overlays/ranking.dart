@@ -71,8 +71,13 @@ class RankingScores extends ConsumerWidget {
             ),
           ),
         ),
-      AsyncError() => const Center(
-          child: Text('Error occurred.'),
+      AsyncError() => Flexible(
+          child: Center(
+            child: Text(
+              'Error occurred.',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
         ),
       _ => const Flexible(
           child: Center(
