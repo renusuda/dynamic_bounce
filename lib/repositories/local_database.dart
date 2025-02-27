@@ -23,6 +23,9 @@ class LocalDatabase {
   /// Best score column.
   static const columnBestScore = 'bestScore';
 
+  /// Whether the account is deleted column.
+  static const columnIsDeletedAccount = 'isDeletedAccount';
+
   Database? _database;
 
   /// Returns the database.
@@ -47,7 +50,8 @@ class LocalDatabase {
           CREATE TABLE $tableName (
             $columnPlayerId TEXT PRIMARY KEY,
             $columnPlayerName TEXT NOT NULL,
-            $columnBestScore INTEGER NOT NULL
+            $columnBestScore INTEGER NOT NULL,
+            $columnIsDeletedAccount INTEGER NOT NULL
           )
         ''');
           // Insert a record for the initial player.
@@ -57,6 +61,7 @@ class LocalDatabase {
               columnPlayerId: playerId,
               columnPlayerName: 'Unknown',
               columnBestScore: 0,
+              columnIsDeletedAccount: 0,
             },
           );
         },
@@ -64,6 +69,23 @@ class LocalDatabase {
     } catch (e) {
       throw Exception('Failed to initialize the database $e');
     }
+  }
+
+  /// Deletes account.
+  Future<void> deleteAcount() async {
+    final db = await database;
+    final playerId = FirebaseAuth.instance.currentUser!.uid;
+    await db.update(
+      tableName,
+      {
+        columnPlayerId: '',
+        columnPlayerName: 'Unknown',
+        columnBestScore: 0,
+        columnIsDeletedAccount: 1,
+      },
+      where: '$columnPlayerId = ?',
+      whereArgs: [playerId],
+    );
   }
 
   /// Closes the database.

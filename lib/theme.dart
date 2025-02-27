@@ -11,8 +11,16 @@ final textTheme = ThemeData(
       fontSize: 36,
       fontWeight: FontWeight.bold,
     ),
+    titleLarge: TextStyle(
+      fontSize: 22,
+      fontWeight: FontWeight.bold,
+    ),
     bodyLarge: TextStyle(
       fontSize: 18,
+      fontWeight: FontWeight.bold,
+    ),
+    bodyMedium: TextStyle(
+      fontSize: 16,
       fontWeight: FontWeight.bold,
     ),
     bodySmall: TextStyle(

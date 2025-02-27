@@ -1,20 +1,23 @@
 /// The type of the game status.
 enum PlayStatusType {
-  /// Home screen of the game.
+  /// Home overlay of the game.
   home,
 
-  /// The game is currently playing.
+  /// Game is currently playing.
   playing,
 
-  /// The score screen after game over.
+  /// Score overlay after game over.
   score,
 
-  /// The ranking screen.
+  /// Ranking overlay.
   ranking,
 
-  /// The player details screen.
+  /// Player details overlay.
   player,
 
-  /// The settings screen.
+  /// Settings overlay.
   settings,
+
+  /// Acount is deleted.
+  deleted,
 }

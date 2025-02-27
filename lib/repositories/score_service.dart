@@ -107,4 +107,13 @@ class ScoreService {
       'updatedAt': FieldValue.serverTimestamp(),
     });
   }
+
+  /// Delete the score.
+  Future<void> deleteScore() async {
+    final player = await ref.read(playerServiceProvider).getPlayer();
+    await FirebaseFirestore.instance
+        .collection('scores')
+        .doc(player.id)
+        .delete();
+  }
 }

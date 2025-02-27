@@ -1,4 +1,5 @@
 import 'package:dynamic_bounce/models/play_status_type.dart';
+import 'package:dynamic_bounce/overlays/deleted.dart';
 import 'package:dynamic_bounce/overlays/home.dart';
 import 'package:dynamic_bounce/overlays/player.dart';
 import 'package:dynamic_bounce/overlays/playing.dart';
@@ -43,6 +44,7 @@ class GameApp extends ConsumerWidget {
                     PlayStatusType.ranking.name: (_, __) => const Ranking(),
                     PlayStatusType.player.name: (_, __) => const Player(),
                     PlayStatusType.settings.name: (_, __) => const Settings(),
+                    PlayStatusType.deleted.name: (_, __) => const Deleted(),
                   },
                 ),
               ),
