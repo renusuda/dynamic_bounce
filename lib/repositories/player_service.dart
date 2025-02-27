@@ -25,6 +25,9 @@ class PlayerService {
   /// Player name column.
   static const _columnPlayerName = LocalDatabase.columnPlayerName;
 
+  /// Whether the player is deleted.
+  static const _columnIsDeletedAccount = LocalDatabase.columnIsDeletedAccount;
+
   /// Get the player id.
   Future<String> getPlayerId() async {
     final db = await instance.database;
@@ -64,5 +67,17 @@ class PlayerService {
       where: '$_columnPlayerId = ?',
       whereArgs: [playerId],
     );
+  }
+
+  /// Get whether the player is deleted.
+  Future<bool> getIsPlayerDeleted() async {
+    final db = await instance.database;
+    final result = await db.query(
+      _tableName,
+      columns: [
+        _columnIsDeletedAccount,
+      ],
+    );
+    return result.first[_columnIsDeletedAccount] == 1;
   }
 }

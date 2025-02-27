@@ -22,6 +22,12 @@ class Player extends _$Player {
     return response;
   }
 
+  /// Fetches whether the player is deleted.
+  Future<bool> fetchIsPlayerDeleted() async {
+    final response = await _playerService.getIsPlayerDeleted();
+    return response;
+  }
+
   /// Updates the player info in local storage.
   Future<void> updatePlayerName(String playerName) async {
     await _playerService.updatePlayer(playerName);
