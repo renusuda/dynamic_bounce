@@ -1,6 +1,7 @@
 import 'package:dynamic_bounce/providers/player.dart';
 import 'package:dynamic_bounce/widgets/buttons/back_to_home_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Player overlay.
@@ -70,6 +71,8 @@ class _UserNameFormState extends ConsumerState<UserNameForm> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Form(
       key: _formKey,
       child: SizedBox(
@@ -89,7 +92,7 @@ class _UserNameFormState extends ConsumerState<UserNameForm> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {
             if (!_isValidName(value)) {
-              return 'Please enter a name between 1 and 8 characters.';
+              return l10n.playerNameValidationMessage;
             }
             return null;
           },

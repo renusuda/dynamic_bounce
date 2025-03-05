@@ -2,6 +2,7 @@ import 'package:dynamic_bounce/providers/player.dart';
 import 'package:dynamic_bounce/providers/ranked_player_scores.dart';
 import 'package:dynamic_bounce/widgets/buttons/back_to_home_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The ranking overlay.
@@ -42,6 +43,8 @@ class RankingScores extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+
     final rankedPlayerScores = ref.watch(rankedPlayerScoresProvider);
     final player = ref.watch(playerProvider);
     return switch (player) {
@@ -74,7 +77,7 @@ class RankingScores extends ConsumerWidget {
       AsyncError() => Flexible(
           child: Center(
             child: Text(
-              'Error occurred.',
+              l10n.rankingFetchErrorMessage,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),

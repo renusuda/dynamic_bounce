@@ -6,6 +6,7 @@ import 'package:dynamic_bounce/widgets/buttons/player_button.dart';
 import 'package:dynamic_bounce/widgets/buttons/ranking_button.dart';
 import 'package:dynamic_bounce/widgets/buttons/settings_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The home overlay.
@@ -66,8 +67,10 @@ class GameTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Text(
-      'DYNAMIC BOUNCE',
+      l10n.appTitle,
       style: Theme.of(context).textTheme.headlineLarge,
     );
   }

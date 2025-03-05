@@ -1,0 +1,15 @@
+{
+  "appTitle": "DYNAMIC BOUNCE",
+  "play": "PLAY",
+  "playAgain": "PLAY AGAIN",
+  "newBestScoreMessage": "ベストスコアを達成🎉",
+  "topRankingMessage": "ランキング上位に到達しました🏆",
+  "rankingFetchErrorMessage": "ランキングデータを取得できませんでした。あとでもう一度お試しください。",
+  "playerNameValidationMessage": "名前は1~8文字までです。",
+  "deleteAllTitle": "データを削除",
+  "deleteDialogTitle": "データを削除",
+  "deleteDialogContent": "本当にデータを削除しますか？\n削除されたデータは復元できません。",
+  "deleteDialogCancel": "キャンセル",
+  "deleteDialogOk": "削除",
+  "accountDeletionSuccess": "アカウントを削除できました。\nゲームをプレイしてくれてありがとうございます。\nまたいつかお会いしましょう😊'"
+}

@@ -3,6 +3,7 @@ import 'package:dynamic_bounce/providers/play_status.dart';
 import 'package:dynamic_bounce/providers/player.dart';
 import 'package:dynamic_bounce/widgets/buttons/back_to_home_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The settings overlay.
@@ -32,10 +33,12 @@ class DeleteAllListTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+
     return ListTile(
       leading: const Icon(Icons.delete_outlined),
       title: Text(
-        'Delete all data',
+        l10n.deleteAllTitle,
         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
               color: Theme.of(context).colorScheme.error,
             ),
@@ -45,11 +48,11 @@ class DeleteAllListTile extends ConsumerWidget {
           context: context,
           builder: (BuildContext context) => AlertDialog(
             title: Text(
-              'Delete all data',
+              l10n.deleteDialogTitle,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             content: Text(
-              '''Are you sure you want to delete data?\nDeleted data cannot be restored.''',
+              l10n.deleteDialogContent,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             actions: <Widget>[
@@ -57,7 +60,7 @@ class DeleteAllListTile extends ConsumerWidget {
               TextButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text(
-                  'Cancel',
+                  l10n.deleteDialogCancel,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
@@ -72,7 +75,7 @@ class DeleteAllListTile extends ConsumerWidget {
                       .updatePlayStatus(PlayStatusType.deleted);
                 },
                 child: Text(
-                  'Delete',
+                  l10n.deleteDialogOk,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.error,
                       ),

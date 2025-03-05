@@ -4,6 +4,7 @@ import 'package:dynamic_bounce/widgets/buttons/home_button.dart';
 import 'package:dynamic_bounce/widgets/buttons/play_again_button.dart';
 import 'package:dynamic_bounce/widgets/buttons/ranking_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The score overlay.
@@ -22,6 +23,8 @@ class _ScoreState extends ConsumerState<Score> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final l10n = AppLocalizations.of(context)!;
+
       final score = ref.read(scoreProvider);
       final scoreResult = await ref.read(scoreProvider.notifier).upsert(score);
       if (!mounted) return;
@@ -29,12 +32,12 @@ class _ScoreState extends ConsumerState<Score> {
         case ScoreResultType.best:
           _showSnackBar(
             context,
-            'New Best Score🎉',
+            l10n.newBestScoreMessage,
           );
         case ScoreResultType.ranking:
           _showSnackBar(
             context,
-            "You're in the top rankings🏆",
+            l10n.topRankingMessage,
           );
         case ScoreResultType.normal:
           break;

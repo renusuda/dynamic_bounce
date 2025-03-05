@@ -1,0 +1,15 @@
+{
+  "appTitle": "DYNAMIC BOUNCE",
+  "play": "PLAY",
+  "playAgain": "PLAY AGAIN",
+  "newBestScoreMessage": "New Best Score🎉",
+  "topRankingMessage": "You're in the top rankings🏆",
+  "rankingFetchErrorMessage": "We couldn't fetch ranking data. Please try again later.",
+  "playerNameValidationMessage": "Please enter a name between 1 and 8 characters.",
+  "deleteAllTitle": "Delete all data",
+  "deleteDialogTitle": "Delete all data",
+  "deleteDialogContent": "Are you sure you want to delete data?\nDeleted data cannot be restored.",
+  "deleteDialogCancel": "Cancel",
+  "deleteDialogOk": "Delete",
+  "accountDeletionSuccess": "Your account has been successfully deleted.\nThank you for playing our game.\nWe hope to see you again in the future.😊'"
+}

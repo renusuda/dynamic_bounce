@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Account deleted overlay.
 class Deleted extends StatelessWidget {
@@ -9,11 +10,13 @@ class Deleted extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Center(
         child: Text(
-          '''Your account has been successfully deleted.\nThank you for playing our game.\nWe hope to see you again in the future.😊''',
+          l10n.accountDeletionSuccess,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
       ),

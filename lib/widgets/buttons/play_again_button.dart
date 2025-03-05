@@ -3,6 +3,7 @@ import 'package:dynamic_bounce/providers/play_status.dart';
 import 'package:dynamic_bounce/providers/score.dart';
 import 'package:dynamic_bounce/widgets/buttons/common_text_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The play again button.
@@ -14,8 +15,10 @@ class PlayAgainButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+
     return CommonTextButton(
-      text: 'PLAY AGAIN',
+      text: l10n.playAgain,
       icon: Icons.replay,
       onPressed: () {
         // Reset the score to 0 and navigate to the playing overlay again.
