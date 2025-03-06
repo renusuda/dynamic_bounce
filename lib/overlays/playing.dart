@@ -95,9 +95,6 @@ class _PlayingState extends ConsumerState<Playing> {
           ),
         ),
       );
-
-    // TODO(me): Delete in the final version.
-    widget.game.debugMode = true;
   }
 
   Future<bool> _getHasDynamicIsland() async {
