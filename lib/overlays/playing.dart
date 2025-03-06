@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dynamic_bounce/components/ball.dart';
 import 'package:dynamic_bounce/components/bat.dart';
 import 'package:dynamic_bounce/components/dynamic_island_block.dart';
@@ -55,12 +56,14 @@ class _PlayingState extends ConsumerState<Playing> {
   }
 
   /// Starts the game.
-  void _startGame() {
+  Future<void> _startGame() async {
     // The initial velocity parameters of the ball.
     // The ball will move in a random direction.
     final velocityX = math.Random().nextDouble() - 0.5;
     const velocityY = 1.0;
     const velocityScale = 250.0;
+
+    final hasDynamicIsland = await _getHasDynamicIsland();
 
     widget.game.world
       ..add(
@@ -88,13 +91,39 @@ class _PlayingState extends ConsumerState<Playing> {
         DynamicIslandBlock(
           position: Vector2(
             widget.game.width / 2,
-            0,
+            hasDynamicIsland ? 0 : 30,
           ),
         ),
       );
 
     // TODO(me): Delete in the final version.
     widget.game.debugMode = true;
+  }
+
+  Future<bool> _getHasDynamicIsland() async {
+    final deviceInfo = DeviceInfoPlugin();
+    final iosInfo = await deviceInfo.iosInfo;
+    final iphoneModel = iosInfo.utsname.machine;
+    // iPhone 14 Pro or later has dynamic island.
+    // iPhone 14 Pro: 'iPhone15.2'
+    // iPhone 14 Pro Max: 'iPhone15.3'
+    // iPhone 15: 'iPhone15.4'
+    // ...
+    // iPhone 16 Plus: 'iPhone17,4'
+    // Get the major version and minor version from the model String.
+    final match = RegExp(r'iPhone(\d+),(\d+)').firstMatch(iphoneModel);
+    if (match == null) {
+      return false;
+    }
+
+    final majorVersion = int.parse(match.group(1)!);
+    final minorVersion = int.parse(match.group(2)!);
+
+    if (majorVersion > 15 || (majorVersion == 15 && minorVersion >= 2)) {
+      return true;
+    }
+
+    return false;
   }
 
   /// Removes all objects from the game world.
