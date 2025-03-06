@@ -135,7 +135,7 @@ class PlayerNameText extends StatelessWidget {
     return Text(
       playerName,
       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            color: isMyScore ? Colors.deepOrangeAccent : null,
+            color: isMyScore ? Colors.blueAccent : null,
           ),
     );
   }
