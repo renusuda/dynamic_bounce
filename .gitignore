@@ -54,4 +54,6 @@ memo/
 lib/firebase_options*.dart
 ios/Runner/GoogleService-Info.plist
 ios/flavors/*/GoogleService-Info.plist
+android/app/google-services.json
+android/app/src/*/google-services.json
 firebase.json
