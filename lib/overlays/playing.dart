@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:device_info_plus/device_info_plus.dart';
@@ -98,6 +99,10 @@ class _PlayingState extends ConsumerState<Playing> {
   }
 
   Future<bool> _getHasDynamicIsland() async {
+    if (!Platform.isIOS) {
+      return false;
+    }
+
     final deviceInfo = DeviceInfoPlugin();
     final iosInfo = await deviceInfo.iosInfo;
     final iphoneModel = iosInfo.utsname.machine;
