@@ -55,10 +55,14 @@ class Ball extends CircleComponent
     if (other is PlayArea) {
       final intersectionPoint = intersectionPoints.first;
 
-      final isTopWallCollision = intersectionPoint.y <= 0;
-      final isLeftWallCollision = intersectionPoint.x <= 0;
-      final isRightWallCollision = intersectionPoint.x >= game.width;
-      final isBottomWallCollision = intersectionPoint.y >= game.height;
+      // Loosen the collision detection.
+      const epsilon = 0.1;
+
+      final isTopWallCollision = intersectionPoint.y <= epsilon;
+      final isLeftWallCollision = intersectionPoint.x <= epsilon;
+      final isRightWallCollision = intersectionPoint.x >= game.width - epsilon;
+      final isBottomWallCollision =
+          intersectionPoint.y >= game.height - epsilon;
       if (isTopWallCollision || isBottomWallCollision) {
         add(
           RemoveEffect(
