@@ -57,3 +57,6 @@ ios/flavors/*/GoogleService-Info.plist
 android/app/google-services.json
 android/app/src/*/google-services.json
 firebase.json
+
+# Claude Code
+.claude/
