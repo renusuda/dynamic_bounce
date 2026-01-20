@@ -24,12 +24,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get topRankingMessage => 'You\'re in the top rankings🏆';
 
   @override
-  String get rankingFetchErrorMessage =>
-      'We couldn\'t fetch ranking data. Please try again later.';
+  String get rankingFetchErrorMessage => 'We couldn\'t fetch ranking data. Please try again later.';
 
   @override
-  String get playerNameValidationMessage =>
-      'Please enter a name between 1 and 8 characters.';
+  String get playerNameValidationMessage => 'Please enter a name between 1 and 8 characters.';
 
   @override
   String get deleteAllTitle => 'Delete all data';
@@ -38,8 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteDialogTitle => 'Delete all data';
 
   @override
-  String get deleteDialogContent =>
-      'Are you sure you want to delete data?\nDeleted data cannot be restored.';
+  String get deleteDialogContent => 'Are you sure you want to delete data?\nDeleted data cannot be restored.';
 
   @override
   String get deleteDialogCancel => 'Cancel';
@@ -48,6 +45,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteDialogOk => 'Delete';
 
   @override
-  String get accountDeletionSuccess =>
-      'Your account has been successfully deleted.\nThank you for playing our game.\nWe hope to see you again in the future.😊';
+  String get accountDeletionSuccess => 'Your account has been successfully deleted.\nThank you for playing our game.\nWe hope to see you again in the future.😊';
 }

@@ -45,6 +45,5 @@ class AppLocalizationsJa extends AppLocalizations {
   String get deleteDialogOk => '削除';
 
   @override
-  String get accountDeletionSuccess =>
-      'アカウントを削除できました。\nゲームをプレイしてくれてありがとうございます。\nまたいつかお会いしましょう😊';
+  String get accountDeletionSuccess => 'アカウントを削除できました。\nゲームをプレイしてくれてありがとうございます。\nまたいつかお会いしましょう😊';
 }
