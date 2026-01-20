@@ -22,6 +22,17 @@ class Bat extends PositionComponent
     ..color = Colors.black
     ..style = PaintingStyle.fill;
 
+  /// Extra padding around the bat for easier drag detection.
+  static const double dragPadding = 100;
+
+  @override
+  bool containsLocalPoint(Vector2 point) {
+    return point.x >= -dragPadding &&
+        point.x <= size.x + dragPadding &&
+        point.y >= -dragPadding &&
+        point.y <= size.y + dragPadding;
+  }
+
   @override
   void render(Canvas canvas) {
     super.render(canvas);
