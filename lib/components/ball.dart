@@ -81,9 +81,14 @@ class Ball extends CircleComponent
       velocity.y = -velocity.y;
     } else if (other is DynamicIslandBlock) {
       const speedUpScale = 1.1;
-      velocity
-        ..y = -velocity.y
-        ..scale(speedUpScale);
+      const maxSpeed = 800.0;
+
+      velocity.y = -velocity.y;
+
+      if (velocity.length < maxSpeed) {
+        velocity.scale(speedUpScale);
+      }
+
       ref.read(scoreProvider.notifier).increment();
     }
   }
