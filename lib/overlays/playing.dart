@@ -59,8 +59,14 @@ class _PlayingState extends ConsumerState<Playing> {
   /// Starts the game.
   Future<void> _startGame() async {
     // The initial velocity parameters of the ball.
-    // The ball will move in a random direction.
-    final velocityX = math.Random().nextDouble() - 0.5;
+    // Ensure minimum horizontal movement to prevent near-vertical trajectories.
+    const minVelocityX = 0.35;
+    const maxVelocityX = 0.7;
+    final random = math.Random();
+    final absVelocityX =
+        minVelocityX + random.nextDouble() * (maxVelocityX - minVelocityX);
+    final sign = random.nextBool() ? 1 : -1;
+    final velocityX = absVelocityX * sign;
     const velocityY = 1.0;
     const velocityScale = 250.0;
 
