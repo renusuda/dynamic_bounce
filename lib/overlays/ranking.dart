@@ -1,8 +1,8 @@
+import 'package:dynamic_bounce/l10n/app_localizations.dart';
 import 'package:dynamic_bounce/providers/player.dart';
 import 'package:dynamic_bounce/providers/ranked_player_scores.dart';
 import 'package:dynamic_bounce/widgets/buttons/back_to_home_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The ranking overlay.

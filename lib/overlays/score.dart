@@ -1,10 +1,10 @@
+import 'package:dynamic_bounce/l10n/app_localizations.dart';
 import 'package:dynamic_bounce/models/score_result_type.dart';
 import 'package:dynamic_bounce/providers/score.dart';
 import 'package:dynamic_bounce/widgets/buttons/home_button.dart';
 import 'package:dynamic_bounce/widgets/buttons/play_again_button.dart';
 import 'package:dynamic_bounce/widgets/buttons/ranking_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The score overlay.

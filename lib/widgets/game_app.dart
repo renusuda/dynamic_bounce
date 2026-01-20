@@ -1,3 +1,4 @@
+import 'package:dynamic_bounce/l10n/app_localizations.dart';
 import 'package:dynamic_bounce/models/play_status_type.dart';
 import 'package:dynamic_bounce/overlays/deleted.dart';
 import 'package:dynamic_bounce/overlays/home.dart';
@@ -10,7 +11,6 @@ import 'package:dynamic_bounce/providers/game.dart';
 import 'package:dynamic_bounce/theme.dart';
 import 'package:flame_riverpod/flame_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
