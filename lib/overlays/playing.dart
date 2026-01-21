@@ -60,14 +60,18 @@ class _PlayingState extends ConsumerState<Playing> {
   Future<void> _startGame() async {
     // The initial velocity parameters of the ball.
     // Ensure minimum horizontal movement to prevent near-vertical trajectories.
-    const minVelocityX = 0.35;
-    const maxVelocityX = 0.7;
-    final random = math.Random();
-    final absVelocityX =
-        minVelocityX + random.nextDouble() * (maxVelocityX - minVelocityX);
-    final sign = random.nextBool() ? 1 : -1;
-    final velocityX = absVelocityX * sign;
-    const velocityY = 1.0;
+    // const minVelocityX = 0.35;
+    // const maxVelocityX = 0.7;
+    // final random = math.Random();
+    // final absVelocityX =
+    //     minVelocityX + random.nextDouble() * (maxVelocityX - minVelocityX);
+    // final sign = random.nextBool() ? 1 : -1;
+    // final velocityX = absVelocityX * sign;
+    // const velocityY = 1.0;
+
+    // TEST: Diagonal upper-left direction
+    const velocityX = -0.5;
+    const velocityY = -1.0;
     const velocityScale = 250.0;
 
     final hasDynamicIsland = await _getHasDynamicIsland();
@@ -82,7 +86,13 @@ class _PlayingState extends ConsumerState<Playing> {
           ).normalized()
             ..scale(velocityScale),
           // Place the ball in the center of the screen.
-          position: widget.game.size / 2,
+          // position: widget.game.size / 2,
+          // TEST: Place the ball in the upper-right area.
+          // position: widget.game.size / 2,
+          position: Vector2(
+            widget.game.width * 0.95,
+            widget.game.height * 0.25,
+          ),
         ),
       )
       ..add(
