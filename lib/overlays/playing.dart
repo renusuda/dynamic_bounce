@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'dart:math' as math;
+// import 'dart:math' as math;
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dynamic_bounce/components/ball.dart';
@@ -60,13 +60,16 @@ class _PlayingState extends ConsumerState<Playing> {
   Future<void> _startGame() async {
     // The initial velocity parameters of the ball.
     // Ensure minimum horizontal movement to prevent near-vertical trajectories.
-    const minVelocityX = 0.35;
-    const maxVelocityX = 0.7;
-    final random = math.Random();
-    final absVelocityX =
-        minVelocityX + random.nextDouble() * (maxVelocityX - minVelocityX);
-    final sign = random.nextBool() ? 1 : -1;
-    final velocityX = absVelocityX * sign;
+    // const minVelocityX = 0.35;
+    // const maxVelocityX = 0.7;
+    // final random = math.Random();
+    // final absVelocityX =
+    //     minVelocityX + random.nextDouble() * (maxVelocityX - minVelocityX);
+    // final sign = random.nextBool() ? 1 : -1;
+    // final velocityX = absVelocityX * sign;
+
+    // TEST: Vertical drop for testing
+    const velocityX = 0.0;
     const velocityY = 1.0;
     const velocityScale = 250.0;
 
