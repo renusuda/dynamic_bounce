@@ -36,10 +36,16 @@ class Ball extends CircleComponent
   /// The velocity of the ball.
   final Vector2 velocity;
 
+  double _collisionCooldown = 0;
+
   @override
   void update(double dt) {
     super.update(dt);
     position += velocity * dt;
+
+    if (_collisionCooldown > 0) {
+      _collisionCooldown -= dt;
+    }
   }
 
   @override
@@ -80,16 +86,20 @@ class Ball extends CircleComponent
     } else if (other is Bat) {
       velocity.y = -velocity.y;
     } else if (other is DynamicIslandBlock) {
-      const speedUpScale = 1.1;
-      const maxSpeed = 800.0;
+      if (_collisionCooldown <= 0) {
+        const speedUpScale = 1.1;
+        const maxSpeed = 800.0;
 
-      velocity.y = -velocity.y;
+        velocity.y = -velocity.y;
 
-      if (velocity.length < maxSpeed) {
-        velocity.scale(speedUpScale);
+        if (velocity.length < maxSpeed) {
+          velocity.scale(speedUpScale);
+        }
+
+        ref.read(scoreProvider.notifier).increment();
+
+        _collisionCooldown = 0.2;
       }
-
-      ref.read(scoreProvider.notifier).increment();
     }
   }
 }
