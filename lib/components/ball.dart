@@ -38,6 +38,9 @@ class Ball extends CircleComponent
 
   double _collisionCooldown = 0;
 
+  /// Flag to prevent multiple game over triggers.
+  bool _isGameOver = false;
+
   @override
   void update(double dt) {
     super.update(dt);
@@ -45,6 +48,31 @@ class Ball extends CircleComponent
 
     if (_collisionCooldown > 0) {
       _collisionCooldown -= dt;
+    }
+
+    // Check if ball is completely outside the screen
+    _checkOutOfBounds();
+  }
+
+  /// Checks if the ball is completely outside the screen.
+  void _checkOutOfBounds() {
+    if (_isGameOver) return;
+
+    final isCompletelyAbove = position.y + radius < 0;
+    final isCompletelyBelow = position.y - radius > game.height;
+
+    if (isCompletelyAbove || isCompletelyBelow) {
+      _isGameOver = true;
+      add(
+        RemoveEffect(
+          delay: 0.35,
+          onComplete: () {
+            ref
+                .read(playStatusProvider.notifier)
+                .updatePlayStatus(PlayStatusType.score);
+          },
+        ),
+      );
     }
   }
 
@@ -64,23 +92,12 @@ class Ball extends CircleComponent
       // Loosen the collision detection.
       const epsilon = 0.1;
 
-      final isTopWallCollision = intersectionPoint.y <= epsilon;
       final isLeftWallCollision = intersectionPoint.x <= epsilon;
       final isRightWallCollision = intersectionPoint.x >= game.width - epsilon;
-      final isBottomWallCollision =
-          intersectionPoint.y >= game.height - epsilon;
-      if (isTopWallCollision || isBottomWallCollision) {
-        add(
-          RemoveEffect(
-            delay: 0.35,
-            onComplete: () {
-              ref
-                  .read(playStatusProvider.notifier)
-                  .updatePlayStatus(PlayStatusType.score);
-            },
-          ),
-        );
-      } else if (isLeftWallCollision || isRightWallCollision) {
+
+      // Bounce off left/right walls only
+      // Game over is handled in _checkOutOfBounds()
+      if (isLeftWallCollision || isRightWallCollision) {
         velocity.x = -velocity.x;
       }
     } else if (other is Bat) {
