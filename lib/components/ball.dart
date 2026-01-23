@@ -101,7 +101,10 @@ class Ball extends CircleComponent
         velocity.x = -velocity.x;
       }
     } else if (other is Bat) {
-      velocity.y = -velocity.y;
+      // Only bounce if the ball is moving downward
+      if (velocity.y > 0) {
+        velocity.y = -velocity.y;
+      }
     } else if (other is DynamicIslandBlock) {
       if (_collisionCooldown <= 0) {
         const speedUpScale = 1.1;
