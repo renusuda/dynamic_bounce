@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:dynamic_bounce/firebase.dart';
 import 'package:dynamic_bounce/repositories/local_database.dart';
 import 'package:dynamic_bounce/widgets/game_app.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +16,14 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await initializeFirebaseApp();
+
+  // Setup Crashlytics error handlers
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   await signInAnonymously();
   await LocalDatabase().database;
   runApp(
