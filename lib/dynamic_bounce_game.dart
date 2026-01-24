@@ -10,8 +10,7 @@ import 'package:flame_riverpod/flame_riverpod.dart';
 import 'package:flutter/material.dart';
 
 /// The game instance.
-class DynamicBounceGame extends FlameGame
-    with HasCollisionDetection, TapDetector, RiverpodGameMixin {
+class DynamicBounceGame extends FlameGame with TapDetector, RiverpodGameMixin {
   /// The width of the game.
   double get width => size.x;
 

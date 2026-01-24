@@ -1,5 +1,4 @@
 import 'package:dynamic_bounce/dynamic_bounce_game.dart';
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +12,6 @@ class Bat extends PositionComponent
     required super.size,
   }) : super(
           anchor: Anchor.center,
-          children: [
-            RectangleHitbox(),
-          ],
         );
 
   final Paint _paint = Paint()

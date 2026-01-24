@@ -1,20 +1,15 @@
-import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_riverpod/flame_riverpod.dart';
 import 'package:flutter/material.dart';
 
 /// The block under dynamic island.
-class DynamicIslandBlock extends PositionComponent
-    with CollisionCallbacks, RiverpodComponentMixin {
+class DynamicIslandBlock extends PositionComponent with RiverpodComponentMixin {
   /// Creates a new block under dynamic island.
   DynamicIslandBlock({
     required super.position,
   }) : super(
           size: Vector2(130, 28),
           anchor: Anchor.center,
-          children: [
-            RectangleHitbox(),
-          ],
         );
 
   final Paint _paint = Paint()
